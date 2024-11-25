@@ -65,7 +65,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+    <div style={{ padding: "25px", fontFamily: "Arial" }}>
       <h1>To-Do List</h1>
       <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} placeholder="Add a new task" />
       <button 
