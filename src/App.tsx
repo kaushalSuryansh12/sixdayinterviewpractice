@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import AddTodo from "./components/AddTodo/AddTodo";
+import TodoList from "./components/TodoList/TodoList";
 
 interface Todo {
   id: number;
@@ -66,52 +68,18 @@ const App: React.FC = () => {
 
   return (
     <div style={{ padding: "25px", fontFamily: "Arial" }}>
-      <h1>To-Do List</h1>
-      <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} placeholder="Add a new task" />
-      <button 
-        onClick={addTodo}>
-          Add
-      </button>
-      
-      <ul>
-        {filteredTodos.map((todo) => (
-          <li key={todo.id}>
-            {todo.isEditing ? (
-              <input 
-              type="text"
-              value={editText} // Use controlled input
-              onChange={(e) => setEditText(e.target.value )} // Update temporory state
-              onBlur={(e) => updateTodo(todo.id, editText)} // Save the updated text
-              />
-            ) : (
-              <span 
-                style={{
-                  textDecoration: todo.completed ? "line-through" : "none", 
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setEditText(todo.text);
-                  toggleEdit(todo.id);
-                }}
-              >
-                {todo.text}
-              </span>
-            )}
-            <button onClick={(e) => 
-            {
-              e.stopPropagation();
-              toggleTodo(todo.id);
-            }}
-            style={{ marginLeft: "10px" }}>Complete</button>
-            <button onClick={(e) => 
-               { e.stopPropagation(); // To prevent event building
-              deleteTodo(todo.id); }}
-               style={{ marginLeft: "10px" }}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      <h1> To-Do List</h1>
+      <AddTodo newTodo={newTodo} setNewTodo={setNewTodo} addTodo={addTodo} />
+      <TodoList 
+        todos={todos}
+        filteredTodos={filteredTodos}
+        editText={editText}
+        setEditText={setEditText}
+        toggleTodo={toggleTodo}
+        toggleEdit={toggleEdit}
+        updateTodo={updateTodo}
+        deleteTodo={deleteTodo}
+      />
       <div>
         <button onClick={() => setFilter("all")}>All</button>
         <button onClick={() => setFilter("completed")}>Completed</button>
@@ -119,7 +87,6 @@ const App: React.FC = () => {
       </div>
     </div>
   );
-
 }
 
 export default App;
