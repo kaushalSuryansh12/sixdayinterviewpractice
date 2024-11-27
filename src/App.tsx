@@ -7,6 +7,7 @@ interface Todo {
   text: string;
   completed: boolean;
   isEditing?: boolean;
+  priority?: boolean;
 }
 
 const App: React.FC = () => {
@@ -31,9 +32,9 @@ const App: React.FC = () => {
     localStorage.setItem("todos", JSON.stringify(todos))
   }, [todos]);
 
-  const addTodo = () => {
+  const addTodo = (priority: boolean = false) => {
     if (newTodo.trim()) {
-      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false, isEditing: false }]);
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false, isEditing: false, priority }]);
       setNewTodo("");
     }
   };

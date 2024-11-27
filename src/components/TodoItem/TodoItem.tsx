@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./TodoItem.module.css";
 
 interface Todo {
     id: number,
@@ -46,8 +47,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
                     {todo.text}
                 </span>
             )}
-            <button onClick={() => toggleTodo(todo.id)}>Complete</button>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button onClick={() => toggleTodo(todo.id)} className={styles.todoCompleteButton}>Complete</button>
+            <button onClick={() => deleteTodo(todo.id)} className={styles.todoDeleteButton}>Delete</button>
         </li>
     );
 };

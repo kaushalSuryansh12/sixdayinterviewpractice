@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react"; 
+import styles from "./AddTodo.module.css";
 
 interface AddTodoProps {
     newTodo: string;
     setNewTodo: (value: string) => void;
-    addTodo: () => void;
+    addTodo: (value: boolean) => void;
 };
 
 const AddTodo: React.FC<AddTodoProps> = ({ newTodo, setNewTodo, addTodo }) => {
     return (
-        <div>
+        <div className={styles.addTodoContainer}>
             <input
                 type="text"
                 value={newTodo}
                 onChange={(e) => setNewTodo(e.target.value)}
                 placeholder="Add a new task"
+                className={styles.AddTodoInput}
             />
-            <button onClick={addTodo}>Add</button>
+            <button onClick={() => addTodo(false)} className={styles.addTodoButton}>Add</button>
+            <button onClick={() => addTodo(true)} className={styles.priorityButton}>Priority</button>
         </div>
     )
 }
